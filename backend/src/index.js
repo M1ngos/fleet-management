@@ -24,6 +24,7 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/fleet-man
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/drivers', require('./routes/drivers'));
 app.use('/api/attendance', require('./routes/attendance'));
+app.use('/api/tasks', require('./routes/tasks'));
 
 // Error handling middleware
 app.use((err, req, res, next) => {

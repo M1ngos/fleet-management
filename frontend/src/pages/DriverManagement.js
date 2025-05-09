@@ -41,9 +41,11 @@ import {
 } from '@mui/icons-material';
 import { driverService } from '../services/api';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 const DriverManagement = () => {
   const theme = useTheme();
+  const navigate = useNavigate();
   const [drivers, setDrivers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -56,6 +58,7 @@ const DriverManagement = () => {
     department: '',
     adminContact: '',
   });
+  const [showDisabledDialog, setShowDisabledDialog] = useState(false);
 
   useEffect(() => {
     fetchDrivers();
@@ -75,25 +78,18 @@ const DriverManagement = () => {
   };
 
   const handleOpenDialog = (driver = null) => {
-    if (driver) {
-      setSelectedDriver(driver);
-      setFormData({
-        name: driver.name,
-        email: driver.email,
-        area: driver.area,
-        department: driver.department,
-        adminContact: driver.adminContact,
-      });
-    } else {
-      setSelectedDriver(null);
-      setFormData({
-        name: '',
-        email: '',
-        area: '',
-        department: '',
-        adminContact: '',
-      });
+    if (!driver) {
+      setShowDisabledDialog(true);
+      return;
     }
+    setSelectedDriver(driver);
+    setFormData({
+      name: driver.name,
+      email: driver.email,
+      area: driver.area,
+      department: driver.department,
+      adminContact: driver.adminContact,
+    });
     setOpenDialog(true);
   };
 
@@ -471,6 +467,33 @@ const DriverManagement = () => {
             }}
           >
             {selectedDriver ? 'Salvar' : 'Adicionar'}
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      <Dialog
+        open={showDisabledDialog}
+        onClose={() => setShowDisabledDialog(false)}
+        maxWidth="xs"
+        fullWidth
+      >
+        <DialogTitle>Funcionalidade desabilitada</DialogTitle>
+        <DialogContent>
+          <Typography>
+            Para adicionar um motorista, utilize a tela de registro.
+          </Typography>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setShowDisabledDialog(false)}>Cancelar</Button>
+          <Button
+            onClick={() => {
+              setShowDisabledDialog(false);
+              navigate('/register');
+            }}
+            variant="contained"
+            color="primary"
+          >
+            Ir para Registro
           </Button>
         </DialogActions>
       </Dialog>

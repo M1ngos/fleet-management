@@ -165,7 +165,7 @@ const OvertimeReport = () => {
       <Card sx={{ mb: 4, boxShadow: 3, borderRadius: 2 }}>
         <CardContent>
           <Grid container spacing={3} alignItems="center">
-            <Grid item xs={12} sm={3}>
+            <Grid item xs={12} sm={6} md={3}>
               <LocalizationProvider dateAdapter={AdapterDateFns}>
                 <DatePicker
                   label="Data Inicial"
@@ -176,14 +176,14 @@ const OvertimeReport = () => {
                       {...params} 
                       fullWidth 
                       InputProps={{
-                        startAdornment: <CalendarIcon color="primary" sx={{ mr: 1 }} />,
+                        startAdornment: <CalendarIcon color="primary" sx={{ mr: 1 }} />, 
                       }}
                     />
                   )}
                 />
               </LocalizationProvider>
             </Grid>
-            <Grid item xs={12} sm={3}>
+            <Grid item xs={12} sm={6} md={3}>
               <LocalizationProvider dateAdapter={AdapterDateFns}>
                 <DatePicker
                   label="Data Final"
@@ -194,14 +194,14 @@ const OvertimeReport = () => {
                       {...params} 
                       fullWidth 
                       InputProps={{
-                        startAdornment: <CalendarIcon color="primary" sx={{ mr: 1 }} />,
+                        startAdornment: <CalendarIcon color="primary" sx={{ mr: 1 }} />, 
                       }}
                     />
                   )}
                 />
               </LocalizationProvider>
             </Grid>
-            <Grid item xs={12} sm={3}>
+            <Grid item xs={12} sm={6} md={3}>
               <FormControl fullWidth>
                 <InputLabel>Motorista</InputLabel>
                 <Select
@@ -219,29 +219,32 @@ const OvertimeReport = () => {
                 </Select>
               </FormControl>
             </Grid>
-            <Grid item xs={12} sm={3}>
-              <Stack direction="row" spacing={2}>
-                <Tooltip title="Buscar">
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={fetchOvertimeData}
-                    startIcon={<FilterIcon />}
-                    fullWidth
-                  >
-                    Buscar
-                  </Button>
-                </Tooltip>
-                <Tooltip title="Limpar Filtros">
-                  <Button
-                    variant="outlined"
-                    color="secondary"
-                    onClick={handleReset}
-                    startIcon={<ClearIcon />}
-                  >
-                    Limpar
-                  </Button>
-                </Tooltip>
+            <Grid item xs={12} sm={6} md={3}>
+              <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} sx={{ width: '100%' }}>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  size="large"
+                  sx={{ borderRadius: 3, minWidth: 120, boxShadow: 2 }}
+                  startIcon={loading ? <CircularProgress size={20} color="inherit" /> : <FilterIcon />}
+                  onClick={fetchOvertimeData}
+                  disabled={loading}
+                  fullWidth
+                >
+                  {loading ? 'Buscando...' : 'Buscar'}
+                </Button>
+                <Button
+                  variant="outlined"
+                  color="secondary"
+                  size="large"
+                  sx={{ borderRadius: 3, minWidth: 120, borderWidth: 2, fontWeight: 600, '&:hover': { borderWidth: 2 } }}
+                  startIcon={<ClearIcon />}
+                  onClick={handleReset}
+                  disabled={loading}
+                  fullWidth
+                >
+                  Limpar
+                </Button>
               </Stack>
             </Grid>
           </Grid>
@@ -256,7 +259,8 @@ const OvertimeReport = () => {
               boxShadow: 3,
               borderRadius: 2,
               transition: 'transform 0.2s',
-              '&:hover': { transform: 'translateY(-5px)' }
+              '&:hover': { transform: 'translateY(-5px)' },
+              mb: { xs: 2, md: 0 }
             }}>
               <CardContent>
                 <Stack direction="row" alignItems="center" spacing={2}>
@@ -281,7 +285,8 @@ const OvertimeReport = () => {
               boxShadow: 3,
               borderRadius: 2,
               transition: 'transform 0.2s',
-              '&:hover': { transform: 'translateY(-5px)' }
+              '&:hover': { transform: 'translateY(-5px)' },
+              mb: { xs: 2, md: 0 }
             }}>
               <CardContent>
                 <Stack direction="row" alignItems="center" spacing={2}>
@@ -306,7 +311,8 @@ const OvertimeReport = () => {
               boxShadow: 3,
               borderRadius: 2,
               transition: 'transform 0.2s',
-              '&:hover': { transform: 'translateY(-5px)' }
+              '&:hover': { transform: 'translateY(-5px)' },
+              mb: { xs: 2, md: 0 }
             }}>
               <CardContent>
                 <Stack direction="row" alignItems="center" spacing={2}>
@@ -326,10 +332,10 @@ const OvertimeReport = () => {
         </Grid>
       </Grid>
 
-      <Card sx={{ boxShadow: 3, borderRadius: 2 }}>
-        <CardContent>
-          <TableContainer>
-            <Table>
+      <Card sx={{ boxShadow: 3, borderRadius: 2, overflowX: 'auto' }}>
+        <CardContent sx={{ p: { xs: 0, sm: 2 } }}>
+          <TableContainer sx={{ minWidth: 320 }}>
+            <Table size="small">
               <TableHead>
                 <TableRow>
                   <TableCell>Motorista</TableCell>

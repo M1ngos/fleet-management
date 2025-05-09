@@ -58,4 +58,15 @@ export const driverService = {
   delete: (id) => api.delete(`/drivers/${id}`),
 };
 
+export const tasksService = {
+  getAll: () => api.get('/tasks'),
+  getById: (id) => api.get(`/tasks/${id}`),
+  create: (data) => api.post('/tasks', data),
+  update: (id, data) => api.put(`/tasks/${id}`, data),
+  delete: (id) => api.delete(`/tasks/${id}`),
+  getMyTasks: () => api.get('/tasks/my-tasks'),
+  getAssignedTasks: () => api.get('/tasks/assigned'),
+  updateStatus: (id, status) => api.patch(`/tasks/${id}/status`, { status }),
+};
+
 export default api; 

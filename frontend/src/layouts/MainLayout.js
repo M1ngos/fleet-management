@@ -34,6 +34,7 @@ import {
   ChevronLeft as ChevronLeftIcon,
   Notifications as NotificationsIcon,
   Settings as SettingsIcon,
+  Assignment as AssignmentIcon,
 } from '@mui/icons-material';
 import { useTheme as useCustomTheme } from '../context/ThemeContext';
 import { useDispatch, useSelector } from 'react-redux';
@@ -66,11 +67,13 @@ const MainLayout = () => {
     { text: 'Motoristas', icon: <PeopleIcon />, path: '/drivers' },
     { text: 'Horas Extras', icon: <AccessTimeIcon />, path: '/overtime' },
     { text: 'Presença', icon: <HistoryIcon />, path: '/attendance' },
+    { text: 'Tarefas', icon: <AssignmentIcon />, path: '/tasks' },
   ];
 
   const driverMenuItems = [
     { text: 'Painel do Motorista', icon: <DashboardIcon />, path: '/driver-dashboard' },
     { text: 'Presença', icon: <HistoryIcon />, path: '/attendance' },
+    { text: 'Tarefas', icon: <AssignmentIcon />, path: '/tasks' },
   ];
 
   const menuItems = user?.role === 'admin' ? adminMenuItems : driverMenuItems;

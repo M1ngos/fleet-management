@@ -22,6 +22,7 @@ import DriverDashboard from './pages/DriverDashboard';
 import DriverManagement from './pages/DriverManagement';
 import OvertimeReport from './pages/OvertimeReport';
 import AttendanceHistory from './pages/AttendanceHistory';
+import Tasks from './pages/Tasks';
 
 // Auth
 import PrivateRoute from './components/PrivateRoute';
@@ -112,6 +113,7 @@ const AppContent = () => {
                 </RoleBasedRoute>
               } />
               <Route path="attendance" element={<AttendanceHistory />} />
+              <Route path="tasks" element={<Tasks />} />
             </Route>
           </Routes>
         </Router>

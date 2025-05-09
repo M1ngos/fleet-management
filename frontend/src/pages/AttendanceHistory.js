@@ -372,27 +372,28 @@ const AttendanceHistory = () => {
             )}
             <Grid item xs={12} sm={3}>
               <Stack direction="row" spacing={2}>
-                <Tooltip title="Buscar">
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={fetchAttendanceData}
-                    startIcon={<FilterIcon />}
-                    fullWidth
-                  >
-                    Buscar
-                  </Button>
-                </Tooltip>
-                <Tooltip title="Limpar Filtros">
-                  <Button
-                    variant="outlined"
-                    color="secondary"
-                    onClick={handleReset}
-                    startIcon={<ClearIcon />}
-                  >
-                    Limpar
-                  </Button>
-                </Tooltip>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  size="large"
+                  sx={{ borderRadius: 3, minWidth: 120, boxShadow: 2 }}
+                  startIcon={loading ? <CircularProgress size={20} color="inherit" /> : <FilterIcon />}
+                  onClick={fetchAttendanceData}
+                  disabled={loading}
+                >
+                  {loading ? 'Buscando...' : 'Buscar'}
+                </Button>
+                <Button
+                  variant="outlined"
+                  color="secondary"
+                  size="large"
+                  sx={{ borderRadius: 3, minWidth: 120, borderWidth: 2, fontWeight: 600, '&:hover': { borderWidth: 2 } }}
+                  startIcon={<ClearIcon />}
+                  onClick={handleReset}
+                  disabled={loading}
+                >
+                  Limpar
+                </Button>
               </Stack>
             </Grid>
           </Grid>
